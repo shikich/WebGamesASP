@@ -1,0 +1,34 @@
+﻿@model WebGamesCRUD.Models.Genre
+@{
+    ViewData["Title"] = "Delete Genre";
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Genre</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+    <div>
+        <form method="post" asp-action="DeletePost" asp-route-genreId="@Model.IdGenre">
+            <input hidden asp-for="IdGenre" />
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <a asp-action="List" class="btn btn-secondary mx-4">Back to List</a>
+        </form>
+    </div>
+    <div class="alert alert-info my-2">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+        <strong>Info!</strong> If genre is already using at Group's Genre - It will not delete
+    </div>
+</div>
+</body>

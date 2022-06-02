@@ -1,0 +1,79 @@
+﻿@model WebGamesCRUD.Models.View.Game_ListGenre_Genre
+@{
+    ViewData["Title"] = "Edit Game";
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <h4>Game</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4 mx-4">
+            <form method="post" asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdGame" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Developer" class="control-label"></label>
+                    <input asp-for="Developer" class="form-control" />
+                    <span asp-validation-for="Developer" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdListGenre" class="control-label"></label>
+                    <input asp-for="IdListGenre" class="form-control" />
+                    <span asp-validation-for="IdListGenre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Edit" class="btn btn-primary" />
+                    <a asp-action="List" class="btn btn-secondary mx-4">Back to List</a>
+                </div>
+            </form>
+        </div>
+        <div>
+            <div class="col">
+                <h2>List's group of genres</h2>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(tuple => tuple.IdListGenre)
+                            </th>
+                            <th>
+                                Genres
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       @foreach (var list in Model.GroupListGenre)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => list.IdListGenre)
+                                </td>
+                                <td>
+                                   @foreach (var genres in Model.GroupGenres)
+                                    {
+                                        if (list.IdListGenre == genres.Id)
+                                        {
+                                            @Html.DisplayFor(modelItem => genres.Genres)
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a asp-controller="ListGenre" asp-action="List" class="btn btn-secondary">Manage Groups</a>
+            </div>
+        </div>
+    </div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>

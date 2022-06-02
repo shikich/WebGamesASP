@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebGamesCRUD.Models.Genre>
+@{
+    ViewData["Title"] = "List's Genres";
+}
+<div class="row pt-6">
+    <div class="col">
+        <h1>List of Genres</h1>
+    </div>
+    <div class="col-lg-5 text-right">
+        <h1>
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
+        </h1>
+    </div>
+</div>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                Changes
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+       @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-primary mx-2" asp-route-genreId="@item.IdGenre">Edit</a>
+                    <a asp-action="Delete" class="btn btn-danger" asp-route-genreId="@item.IdGenre">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

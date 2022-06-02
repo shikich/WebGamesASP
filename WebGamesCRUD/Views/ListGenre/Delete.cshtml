@@ -1,0 +1,28 @@
+﻿@model WebGamesCRUD.Models.ListGenre
+@{
+    ViewData["Title"] = "Delete Group's genres";
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ListGenre</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdListGenre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdListGenre)
+        </dd>
+    </dl>
+    <form method="post" asp-action="DeletePost" asp-route-listGenreId="@Model.IdListGenre">
+        <input hidden asp-for="IdListGenre" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="List" class="btn btn-secondary mx-4">Back to List</a>
+    </form>
+</div>
+</body>

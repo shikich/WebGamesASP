@@ -1,0 +1,63 @@
+﻿@model WebGamesCRUD.Models.View.GenreListGenre
+@{
+    ViewData["Title"] = "Create Group's genres";
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    <h4>ListGenre</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="control-label">ID #@Model.IdGenreListGenre</label>
+                    <input type="hidden" asp-for="IdGenreListGenre"/>
+                </div>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                IdGenre
+                            </th>
+                            <th>
+                                Genres
+                            </th>
+                            <th>
+                                IsAdded
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       @for(int i = 0; i < Model.GroupGenres.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => modelItem.GroupGenres[i].IdGenre)
+                                    <input hidden asp-for="@Model.GroupGenres[i].IdGenre"/>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => modelItem.GroupGenres[i].Name)
+                                    <input hidden asp-for="@Model.GroupGenres[i].Name"/>
+                                </td>
+                                <td>
+                                    @Html.CheckBoxFor(modelItem => modelItem.GroupGenres[i].Status)
+                                </td>
+                            </tr>
+                        } 
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a asp-action="List" class="btn btn-outline-secondary mx-4">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>

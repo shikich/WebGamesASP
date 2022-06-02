@@ -1,0 +1,58 @@
+﻿@model Tuple<List<Game>, List<GameGenre>>
+@{
+    ViewData["Title"] = "List's Games";
+}
+<div class="row pt-6">
+    <div class="col">
+        <h1>List of Games</h1>
+    </div>
+    <div class="col-lg-5 text-right">
+        <h1>
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
+        </h1>
+    </div>
+</div>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(tuple => tuple.Item1.First().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(tuple => tuple.Item1.First().Developer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(tuple => tuple.Item2.First().Genres)
+            </th>
+            <th>Changes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Item1)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Developer)
+                </td>
+                <td>
+                   @foreach (var item2 in Model.Item2)
+                    {
+                        if (item.IdGame == item2.Id)
+                        {
+                            @Html.DisplayFor(modelItem => item2.Genres)
+                        }
+                    }
+                </td>
+                <td>
+                    <div>
+                        <a asp-action="Edit" asp-route-gameId="@item.IdGame" class="btn btn-primary mx-2">Edit</a>
+                        <a asp-action="Delete" asp-route-gameId="@item.IdGame" class="btn btn-danger">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
